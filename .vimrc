@@ -156,7 +156,20 @@ vmap <F3> :s/^\/\/\ //g <CR> :noh <CR>
 "ever notice a slight lag after typing the leader key + command? This lowers the timeout.
 set timeoutlen=250
 
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
+Plugin 'gmarik/Vundle.vim'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'scrooloose/nerdtree'
+
+call vundle#end()
+
+
+map <C-n> :NERDTreeToggle<CR>
+
+
+au BufNewFile,BufRead *.html set filetype=htmldjango
 
 
 
