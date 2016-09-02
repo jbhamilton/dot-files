@@ -1,5 +1,34 @@
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'gmarik/Vundle.vim'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'ap/vim-css-color'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'elixir-lang/vim-elixir'
+
+Plugin 'fatih/vim-go'
+let g:go_doc_keywordprg_enabled = 0
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
+call vundle#end()
+
+
+filetype plugin indent on
+
 syntax on                           " Syntax highlighting
-filetype plugin indent on           " Enable filetype-specific plugins
+set background=dark
+"colorscheme solarized
+
 
 set title
 set laststatus=2                    " Always show the statusline
@@ -8,7 +37,6 @@ set encoding=utf-8                  " unicode!
 set history=500
 set undolevels=500
 
-set background=dark
 set number
 "set relativenumber                "relative number line.. a bit annoying
 set hidden                        "hide buffers when not displayed
@@ -34,6 +62,8 @@ set smartindent
 set shiftround                      " use multiple of shiftwidth when indenting with '<' and '>'
 
 set <F8> :Explore<CR>
+
+set pastetoggle=<F3>
 
 set splitright splitbelow
 set columns=320
@@ -130,7 +160,7 @@ map n nzz
 nnoremap ' :
 nnoremap ; <Esc>
 
-map K <Esc>:buffers<CR>:buffer<Space>
+noremap K <Esc>:buffers<CR>:buffer<Space>
 
 imap kj <Esc>
 imap jk <Esc>
@@ -156,22 +186,10 @@ vmap <F3> :s/^\/\/\ //g <CR> :noh <CR>
 "ever notice a slight lag after typing the leader key + command? This lowers the timeout.
 set timeoutlen=250
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'gmarik/Vundle.vim'
-Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'scrooloose/nerdtree'
-
-call vundle#end()
+set rtp+=$GOROOT/misc/vim
 
 
 map <C-n> :NERDTreeToggle<CR>
 
 
 au BufNewFile,BufRead *.html set filetype=htmldjango
-
-
-
-
-
