@@ -4,6 +4,16 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'scrooloose/syntastic'
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 Plugin 'gmarik/Vundle.vim'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'scrooloose/nerdtree'
@@ -20,8 +30,17 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
+Plugin 'SirVer/ultisnips'
+Plugin 'shawncplus/phpcomplete.vim'
+Plugin 'marijnh/tern_for_vim'
+
+Plugin 'valloric/youcompleteme'
+let g:ycm_autoclose_preview_window_after_insertion = 1
+
 call vundle#end()
 
+"YCM <C-Space> doesn't work so we force it to another map
+inoremap <C-L> <C-x><C-o><C-p>
 
 filetype plugin indent on
 
@@ -92,8 +111,8 @@ set foldmethod=manual                     " detect triple-{ style fold markers
 set foldlevelstart=1                      " start out with everything folded
 set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
 
-au BufWinLeave * mkview
-au BufWinEnter * silent loadview
+"au BufWinLeave ?* mkview 1
+"au BufWinEnter ?* silent loadview 1
 
 "skip wrapped lines while moving in command mode
 nnoremap j gj
@@ -116,7 +135,7 @@ map <Leader>a ggVG
 
 map Q @@                               "Map Q to repeat the last recorded macro 
 
-map <Esc><Esc> :wq<CR>
+map <Esc><Esc> :wall<CR>
 
 
 "keep search pattern at the center of the screen.
@@ -190,6 +209,7 @@ set rtp+=$GOROOT/misc/vim
 
 
 map <C-n> :NERDTreeToggle<CR>
+:noremap <F5> :exec (&syntax == "on" ? ':set syntax=off' : ':set syntax=on')<bar>:setlocal spell! spelllang=en_us<CR>
 
 
 au BufNewFile,BufRead *.html set filetype=htmldjango
