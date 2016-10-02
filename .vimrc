@@ -4,6 +4,12 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+
+Plugin 'gmarik/Vundle.vim'
+
+Plugin 'vim-scripts/taglist.vim'
+Plugin 'tpope/vim-surround'
+
 Plugin 'scrooloose/syntastic'
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -14,7 +20,20 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-Plugin 'gmarik/Vundle.vim'
+Plugin 'rstacruz/sparkup'
+
+Plugin 'nathanaelkane/vim-indent-guides'
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+let g:indent_guides_auto_colors = 0
+""Color for indent guides plugin
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=238
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=239
+
+Plugin 'sjl/gundo.vim'
+nnoremap <C-u> :GundoToggle<CR>
+
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ap/vim-css-color'
@@ -39,6 +58,7 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 
 call vundle#end()
 
+
 "YCM <C-Space> doesn't work so we force it to another map
 inoremap <C-L> <C-x><C-o><C-p>
 
@@ -46,6 +66,7 @@ filetype plugin indent on
 
 syntax on                           " Syntax highlighting
 set background=dark
+set t_Co=256
 "colorscheme solarized
 
 
@@ -208,7 +229,14 @@ set timeoutlen=250
 set rtp+=$GOROOT/misc/vim
 
 
+"toggle nerdtree
 map <C-n> :NERDTreeToggle<CR>
+
+"toggle taglist 
+map <S-n> :TlistToggle<CR>
+
+
+"run a spell check on the file
 :noremap <F5> :exec (&syntax == "on" ? ':set syntax=off' : ':set syntax=on')<bar>:setlocal spell! spelllang=en_us<CR>
 
 
