@@ -32,7 +32,7 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=238
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=239
 
 Plugin 'sjl/gundo.vim'
-nnoremap <C-u> :GundoToggle<CR>
+nnoremap <S-u> :GundoToggle<CR>
 
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'scrooloose/nerdtree'
