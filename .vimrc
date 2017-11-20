@@ -22,14 +22,18 @@ let g:syntastic_check_on_wq = 0
 
 Plugin 'rstacruz/sparkup'
 
-Plugin 'nathanaelkane/vim-indent-guides'
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
-let g:indent_guides_auto_colors = 0
-""Color for indent guides plugin
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=238
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=239
+Plugin 'Yggdroot/indentLine'
+let g:indentLine_color_term = 183
+nnoremap <S-i> :IndentLinesToggle<CR>
+
+"Plugin 'nathanaelkane/vim-indent-guides'
+"let g:indent_guides_enable_on_vim_startup = 0
+"let g:indent_guides_start_level = 2
+"let g:indent_guides_guide_size = 1
+"let g:indent_guides_auto_colors = 0
+"""Color for indent guides plugin
+"autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=238
+"autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=239
 
 Plugin 'sjl/gundo.vim'
 nnoremap <S-u> :GundoToggle<CR>
@@ -62,13 +66,22 @@ call vundle#end()
 "YCM <C-Space> doesn't work so we force it to another map
 inoremap <C-L> <C-x><C-o><C-p>
 
+"map <S-i> :IndentGuidesToggle<CR>
+
 filetype plugin indent on
 
 syntax on                           " Syntax highlighting
 set background=dark
 set t_Co=256
+colorscheme default
 "colorscheme solarized
 
+"http://andrewradev.com/2011/08/06/making-vim-pretty-with-custom-colors/
+highlight Pmenu ctermfg=33 ctermbg=0
+highlight PmenuSel ctermfg=15 ctermbg=27
+highlight Search ctermfg=235 ctermbg=197
+"highlight CursorLine cterm=bold ctermfg=234 ctermbg=225
+highlight CursorLine cterm=underline ctermfg=69 ctermbg=NONE
 
 set title
 set laststatus=2                    " Always show the statusline
@@ -187,9 +200,9 @@ nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
 set wrap
-set textwidth=115
+"set textwidth=115
 set formatoptions=qrn1
-set colorcolumn=120
+"set colorcolumn=120
 set undofile                        "allows you to undo after reopening
 
 
@@ -197,8 +210,8 @@ set undofile                        "allows you to undo after reopening
 map N Nzz
 map n nzz
 
-nnoremap ' :
-nnoremap ; <Esc>
+"nnoremap ' :
+"nnoremap ; <Esc>
 
 noremap K <Esc>:buffers<CR>:buffer<Space>
 
