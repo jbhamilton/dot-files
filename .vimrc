@@ -35,6 +35,9 @@ nnoremap <S-i> :IndentLinesToggle<CR>
 "autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=238
 "autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=239
 
+"Toggle guides on/off
+"nnoremap <S-i> :IndentGuidesToggle <CR>
+
 Plugin 'sjl/gundo.vim'
 nnoremap <S-u> :GundoToggle<CR>
 
@@ -152,8 +155,6 @@ set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
 nnoremap j gj
 nnoremap k gk
 
-map <Esc><Esc> :w!<CR>
-
 "enter search matches when jumping
 map N Nzz
 map n nzz
@@ -162,15 +163,10 @@ map n nzz
 nnoremap <Tab> >>
 nnoremap <S-Tab> <<
 
-
-
 " select all
 map <Leader>a ggVG
 
 map Q @@                               "Map Q to repeat the last recorded macro 
-
-map <Esc><Esc> :wall<CR>
-
 
 "keep search pattern at the center of the screen.
 nnoremap <silent> n nzz
@@ -211,7 +207,7 @@ map N Nzz
 map n nzz
 
 "nnoremap ' :
-"nnoremap ; <Esc>
+nnoremap ; <Esc>
 
 noremap K <Esc>:buffers<CR>:buffer<Space>
 
@@ -254,3 +250,13 @@ map <S-n> :TlistToggle<CR>
 
 
 au BufNewFile,BufRead *.html set filetype=htmldjango
+
+"Increase the width of the current window
+noremap <A-Right> :vertical resize +5 <CR>
+"Decrease the width of the current window
+noremap <A-Left> :vertical resize -5 <CR>
+
+"Increase the height of the current window
+noremap <A-Up> :resize +5 <CR>
+"Decrease the height of the current window
+noremap <A-Down> :resize -5 <CR>
