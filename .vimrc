@@ -8,6 +8,9 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 Plugin 'vim-scripts/taglist.vim'
+"toggle taglist 
+map <F10> :TlistToggle<CR>
+
 Plugin 'tpope/vim-surround'
 
 Plugin 'scrooloose/syntastic'
@@ -42,9 +45,36 @@ Plugin 'sjl/gundo.vim'
 nnoremap <S-u> :GundoToggle<CR>
 
 Plugin 'kien/rainbow_parentheses.vim'
+let g:rbpt_colorpairs = [
+    \ [219, 'r'],
+    \ [218, 'r'],
+    \ [217, 'r'],
+    \ [216, 'r'],
+    \ [215, 'r'],
+    \ [214, 'r'],
+    \ [213, 'r'],
+    \ [212, 'r'],
+    \ [211, 'r'],
+    \ [210, 'r'],
+    \ [209, 'r'],
+    \ [208, 'r'],
+    \ [207, 'r'],
+    \ [206, 'r'],
+    \ [205, 'r'],
+    \ [204, 'r'],
+    \ [203, 'r'],
+    \ ]
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
 Plugin 'scrooloose/nerdtree'
+"toggle nerdtree
+nnoremap <C-n> :NERDTreeToggle<CR>
+
 Plugin 'ap/vim-css-color'
-Plugin 'altercation/vim-colors-solarized'
+"Plugin 'altercation/vim-colors-solarized'
 Plugin 'elixir-lang/vim-elixir'
 
 Plugin 'fatih/vim-go'
@@ -65,11 +95,8 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 
 call vundle#end()
 
-
 "YCM <C-Space> doesn't work so we force it to another map
 inoremap <C-L> <C-x><C-o><C-p>
-
-"map <S-i> :IndentGuidesToggle<CR>
 
 filetype plugin indent on
 
@@ -82,9 +109,10 @@ colorscheme default
 "http://andrewradev.com/2011/08/06/making-vim-pretty-with-custom-colors/
 highlight Pmenu ctermfg=33 ctermbg=0
 highlight PmenuSel ctermfg=15 ctermbg=27
-highlight Search ctermfg=235 ctermbg=197
-"highlight CursorLine cterm=bold ctermfg=234 ctermbg=225
-highlight CursorLine cterm=underline ctermfg=69 ctermbg=NONE
+"highlight Search ctermfg=235 ctermbg=197
+highlight Search ctermfg=235 ctermbg=116
+"highlight CursorLine cterm=underline ctermfg=69 ctermbg=NONE
+highlight Visual ctermfg=NONE ctermbg=62
 
 set title
 set laststatus=2                    " Always show the statusline
@@ -143,10 +171,15 @@ set virtualedit+=block
 
 " Switch on folding between all braces
 set foldenable                            " enable folding
+setlocal foldmethod=syntax
 "set foldcolumn=2                         " add a fold column
-set foldmethod=manual                     " detect triple-{ style fold markers
-set foldlevelstart=1                      " start out with everything folded
-set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
+"set foldmethod=manual                     " detect triple-{ style fold markers
+"set foldlevelstart=1                      " start out with everything folded
+"set foldnestmax=1
+"set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
+
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+vnoremap <Space> zf
 
 "au BufWinLeave ?* mkview 1
 "au BufWinEnter ?* silent loadview 1
@@ -236,13 +269,6 @@ vmap <F3> :s/^\/\/\ //g <CR> :noh <CR>
 set timeoutlen=250
 
 set rtp+=$GOROOT/misc/vim
-
-
-"toggle nerdtree
-map <C-n> :NERDTreeToggle<CR>
-
-"toggle taglist 
-map <S-n> :TlistToggle<CR>
 
 
 "run a spell check on the file
