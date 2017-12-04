@@ -93,7 +93,15 @@ Plugin 'marijnh/tern_for_vim'
 Plugin 'valloric/youcompleteme'
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+let g:airline_theme='violet'
+
+Plugin 'tpope/vim-fugitive'
+
 call vundle#end()
+
+"let g:airline_section_a = airline#section#create(['mode', ' ', 'branch'])
 
 "YCM <C-Space> doesn't work so we force it to another map
 inoremap <C-L> <C-x><C-o><C-p>
@@ -113,6 +121,16 @@ highlight PmenuSel ctermfg=15 ctermbg=27
 highlight Search ctermfg=235 ctermbg=116
 "highlight CursorLine cterm=underline ctermfg=69 ctermbg=NONE
 highlight Visual ctermfg=NONE ctermbg=62
+
+set ruler
+set cursorline 
+set cuc                                                 "cursor column
+hi CursorColumn ctermfg=white ctermbg=NONE cterm=NONE
+"highlight StatusLine ctermfg=black ctermbg=gray cterm=NONE
+highlight StatusLine ctermfg=235 ctermbg=68 cterm=NONE
+highlight StatusLineNC ctermfg=black ctermbg=yellow cterm=NONE
+
+
 
 set title
 set laststatus=2                    " Always show the statusline
@@ -145,41 +163,41 @@ set copyindent
 set smartindent
 set shiftround                      " use multiple of shiftwidth when indenting with '<' and '>'
 
-set <F8> :Explore<CR>
-
 set pastetoggle=<F3>
 
 set splitright splitbelow
 set columns=320
 
-"Highlight cursorline ONLY in the active window:
-
 "custom invisibles 
 "set list
 "set listchars=trail:~,eol:^
-
-set ruler
-set cursorline 
-set cuc                                                 "cursor column
-hi CursorColumn ctermfg=white ctermbg=NONE cterm=NONE
-highlight StatusLine ctermfg=black ctermbg=gray cterm=NONE
-highlight StatusLineNC ctermfg=black ctermbg=yellow cterm=NONE
 
 
 " allow freeform selection (i.e. ignoring line endings) in visual block mode
 set virtualedit+=block
 
 " Switch on folding between all braces
-set foldenable                            " enable folding
-setlocal foldmethod=syntax
-"set foldcolumn=2                         " add a fold column
-"set foldmethod=manual                     " detect triple-{ style fold markers
-"set foldlevelstart=1                      " start out with everything folded
-"set foldnestmax=1
+set foldenable
+setlocal foldmethod=indent
+set foldcolumn=2
+set foldlevelstart=1
+set foldnestmax=2
 "set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
+
+let $toggleAllFolds=0
+function ToggleAllFolds()
+if $toggleAllFolds==0
+    :exe "normal zr"
+    let $toggleAllFolds=1
+else
+    :exe "normal zm"
+    let $toggleAllFolds=0
+endif
+endfunction
 
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
+nnoremap zz :call ToggleAllFolds()<CR>
 
 "au BufWinLeave ?* mkview 1
 "au BufWinEnter ?* silent loadview 1
