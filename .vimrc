@@ -129,6 +129,8 @@ hi CursorColumn ctermfg=white ctermbg=NONE cterm=NONE
 "highlight StatusLine ctermfg=black ctermbg=gray cterm=NONE
 highlight StatusLine ctermfg=235 ctermbg=68 cterm=NONE
 highlight StatusLineNC ctermfg=black ctermbg=yellow cterm=NONE
+hi clear SpellBad
+hi SpellBad ctermfg=196 cterm=underline
 
 
 
@@ -184,22 +186,22 @@ set foldlevelstart=1
 set foldnestmax=2
 "set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
 
-let $toggleAllFolds=0
-function ToggleAllFolds()
-if $toggleAllFolds==0
-    :exe "normal zr"
-    let $toggleAllFolds=1
-else
-    :exe "normal zm"
-    let $toggleAllFolds=0
-endif
-endfunction
+"let $toggleAllFolds=0
+"function ToggleAllFolds()
+"if $toggleAllFolds==0
+"    :exe "normal zr"
+"    let $toggleAllFolds=1
+"else
+"    :exe "normal zm"
+"    let $toggleAllFolds=0
+"endif
+"endfunction
 
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
-nnoremap zz :call ToggleAllFolds()<CR>
+"nnoremap zz :call ToggleAllFolds()<CR>
 
-"au BufWinLeave ?* mkview 1
+au BufWinLeave ?* mkview 1
 "au BufWinEnter ?* silent loadview 1
 
 "skip wrapped lines while moving in command mode
@@ -288,9 +290,17 @@ set timeoutlen=250
 
 set rtp+=$GOROOT/misc/vim
 
-
-"run a spell check on the file
-:noremap <F5> :exec (&syntax == "on" ? ':set syntax=off' : ':set syntax=on')<bar>:setlocal spell! spelllang=en_us<CR>
+:noremap <F4> :call ToggleSpellCheck()<cr>
+let g:spellcheck_on = 0
+function! ToggleSpellCheck()
+    if g:spellcheck_on
+        set nospell
+        let g:spellcheck_on = 0
+    else 
+        set spell spelllang=en_us
+        let g:spellcheck_on = 1
+    endif
+endfunction
 
 
 au BufNewFile,BufRead *.html set filetype=htmldjango
